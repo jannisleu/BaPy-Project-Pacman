@@ -14,6 +14,7 @@ class Pacman:
         self.position = Vector(200, 200)
         self.directions = {STOP: Vector(), UP: Vector(0, -1), DOWN: Vector(0, 1), LEFT: Vector(-1, 0), RIGHT: Vector(1, 0)}
         self.direction = STOP
+        self.speed = 0.1
         self.radius = 10
         self.color = YELLOW
         self.name = PACMAN
@@ -29,9 +30,11 @@ class Pacman:
             return UP
         if keys[K_DOWN]:
             return DOWN
+        return STOP
 
     def move(self):
-        pass
+        self.position += self.directions[self.direction]*self.speed 
+        self.direction = self.getDirection()
 
 
     def render(self, screen):
