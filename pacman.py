@@ -12,6 +12,7 @@ class Pacman:
 
     def __init__(self):
         self.position = Vector(200, 200)
+        self.directions = {STOP: Vector(), UP: Vector(0, -1), DOWN: Vector(0, 1), LEFT: Vector(-1, 0), RIGHT: Vector(1, 0)}
         self.direction = STOP
         self.radius = 10
         self.color = YELLOW
@@ -29,9 +30,10 @@ class Pacman:
         if keys[K_DOWN]:
             return DOWN
 
-        def move(self):
-            pass
+    def move(self):
+        pass
 
 
     def render(self, screen):
-        pygame.draw.circle(screen, YELLOW, self.position, self.radius)
+        p = self.position.asInt()
+        pygame.draw.circle(screen, YELLOW, p, self.radius)
