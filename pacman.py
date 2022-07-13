@@ -14,7 +14,7 @@ class Pacman:
         self.position = Vector(200, 200)
         self.directions = {STOP: Vector(), UP: Vector(0, -1), DOWN: Vector(0, 1), LEFT: Vector(-1, 0), RIGHT: Vector(1, 0)}
         self.direction = STOP
-        self.speed = 0.1
+        self.speed = 5
         self.radius = 10
         self.color = YELLOW
         self.name = PACMAN

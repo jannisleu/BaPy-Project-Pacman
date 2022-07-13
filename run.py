@@ -1,6 +1,7 @@
 import pygame
 from constants import *
 from pacman import Pacman
+from map import Map
 from pygame.locals import (
 
     K_ESCAPE,
@@ -18,6 +19,7 @@ class Game:
         self.background = pygame.surface.Surface(SCREENSIZE).convert()
         self.background.fill(BLACK)
         self.pacman = Pacman()
+        self.map = Map("1.txt", self.screen)
 
     def checkConditions(self):
 
@@ -31,6 +33,7 @@ class Game:
 
     def render(self):
         self.screen.blit(self.background, (0,0))
+        self.map.render(self.screen)
         self.pacman.render(self.screen)
         pygame.display.update()
 
