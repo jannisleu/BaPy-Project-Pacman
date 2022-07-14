@@ -22,6 +22,7 @@ COIN = pygame.image.load("Pictures/bonbon.png")
 COIN = pygame.transform.scale(COIN, (TILESIZE, TILESIZE))
 BRICK = pygame.image.load("Pictures/dunkel-blau.png")
 BRICK = pygame.transform.scale(BRICK, (TILESIZE, TILESIZE))
-#BLANK = pygame.image.load()
+BLANK = pygame.image.load("Pictures/blank.png")
+BLANK = pygame.transform.scale(BLANK, (TILESIZE, TILESIZE))
 
 print(BRICK)

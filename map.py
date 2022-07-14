@@ -18,6 +18,10 @@ class Map:
             for i in range(rows):
                 if data[i][j] == 0:
                     screen.blit(BRICK, (j*25,i*25))
+                if data[i][j] == 1:
+                    screen.blit(COIN, (j*25,i*25))
+                if data[i][j] == 2:
+                    screen.blit(BLANK, (j*25,i*25))
             
             
 
