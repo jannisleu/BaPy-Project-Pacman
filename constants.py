@@ -14,12 +14,13 @@ STOP = 0
 
 SCREENWIDTH = 475
 SCREENHEIGHT = 625
-SCREENSIZE = (SCREENHEIGHT, SCREENWIDTH)
+SCREENSIZE = (SCREENWIDTH, SCREENHEIGHT)
 TILESIZE = 25
 
 #Map
-#COIN = pygame.image.load()
-BRICK = pygame.image.load("Pictures/Brick.png")
+COIN = pygame.image.load("Pictures/bonbon.png")
+COIN = pygame.transform.scale(COIN, (TILESIZE, TILESIZE))
+BRICK = pygame.image.load("Pictures/dunkel-blau.png")
 BRICK = pygame.transform.scale(BRICK, (TILESIZE, TILESIZE))
 #BLANK = pygame.image.load()
 

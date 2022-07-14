@@ -12,11 +12,15 @@ class Map:
     def loadLevel(self, level):
         return np.loadtxt(level, dtype = int)
 
-    def createBoard(self, data, screen):
-        for rows in range(data.shape[0]):
-            for cols in range(data.shape[1]):
-                if data[rows][cols] == 0:
-                    screen.blit(BRICK, (rows, cols))
+    def createBoard(self, data, screen): 
+        rows,cols = np.shape(data)
+        for j in range(cols):
+            for i in range(rows):
+                if data[i][j] == 0:
+                    screen.blit(BRICK, (j*25,i*25))
+            
+            
+
 
     def render(self, screen):
         self.createBoard(self.map, screen)
