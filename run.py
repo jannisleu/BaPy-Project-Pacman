@@ -11,7 +11,12 @@ from pygame.locals import (
 
 class Game:
 
-    def __init__(self):
+    def __init__(self, level):
+        """Create a Game object which manages the current game state
+
+        Args:
+            level (Textfile): Level that you want to play
+        """
         pygame.init()
         self.clock = pygame.time.Clock()
         self.clock.tick(30)
@@ -19,9 +24,10 @@ class Game:
         self.background = pygame.surface.Surface(SCREENSIZE).convert()
         self.background.fill(BLACK)
         self.pacman = Pacman()
-        self.map = Map("1.txt", self.screen)
+        self.map = Map(level, self.screen)
 
     def checkConditions(self):
+        """Checks for certain keypresses to end the programm"""
 
         for event in pygame.event.get():
             if event.type == KEYDOWN:
@@ -32,21 +38,27 @@ class Game:
         
 
     def render(self):
+        """renders the object on the screen"""
         self.screen.blit(self.background, (0,0))
         self.map.render(self.screen)
         self.pacman.render(self.screen)
         pygame.display.update()
 
     def update(self):
+        """update the position etc. of our objects in the game"""
         direction = self.pacman.getDirection()
+        #rundungsprobleme
         col, row = self.pacman.position.asInt()
-        self.map.checkandUpdate(int(row/TILESIZE), int(col/TILESIZE), direction)
-        self.pacman.move()
+        if direction in self.map.validDirections(int(row/TILESIZE), int(col/TILESIZE)):
+            self.pacman.move(direction)
+            self.map.updateValues(int(row/TILESIZE), int(col/TILESIZE))
+        #self.pacman.move()
         self.render()
         self.checkConditions()
 
 if __name__ == "__main__":
-    game = Game()
+    #start game
+    game = Game("1.txt")
     while True:
         game.update()
         
