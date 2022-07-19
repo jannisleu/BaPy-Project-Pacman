@@ -23,13 +23,32 @@ class Map:
                 if data[i][j] == 2:
                     screen.blit(BLANK, (j*25,i*25))
             
-            
+    def checkandUpdate(self, row, col, direction): 
+
+        if direction == LEFT:
+            if self.map[row][col - 1] != 0:
+                self.map[row][col] = 2
+                return True
+        elif direction == RIGHT:
+            if self.map[row][col + 1] != 0:
+                self.map[row][col] = 2
+                return True
+        elif direction == UP:
+            if self.map[row - 1][col] != 0:
+                self.map[row][col] = 2
+                return True
+        elif direction == DOWN:
+            if self.map[row + 1][col] != 0:
+                self.map[row][col] = 2
+                return True
+        elif direction == STOP:
+            return True
+        return False
 
 
     def render(self, screen):
         self.createBoard(self.map, screen)
 
-#map = Map("1.txt", )
 
 
 

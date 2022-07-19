@@ -11,10 +11,10 @@ from pygame.locals import (
 class Pacman:
 
     def __init__(self):
-        self.position = Vector(200, 200)
+        self.position = Vector(9*TILESIZE, 16*TILESIZE)
         self.directions = {STOP: Vector(), UP: Vector(0, -1), DOWN: Vector(0, 1), LEFT: Vector(-1, 0), RIGHT: Vector(1, 0)}
         self.direction = STOP
-        self.speed = 5
+        self.speed = 2.5
         self.radius = 10
         self.color = YELLOW
         self.name = PACMAN

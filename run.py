@@ -38,6 +38,9 @@ class Game:
         pygame.display.update()
 
     def update(self):
+        direction = self.pacman.getDirection()
+        col, row = self.pacman.position.asInt()
+        self.map.checkandUpdate(int(row/TILESIZE), int(col/TILESIZE), direction)
         self.pacman.move()
         self.render()
         self.checkConditions()
