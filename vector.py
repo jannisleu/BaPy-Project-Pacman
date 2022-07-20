@@ -45,3 +45,6 @@ class Vector:
 
     def asTuple(self):
         return self.x, self.y
+
+    def __str__(self):
+        return "<"+str(self.x)+", "+str(self.y)+">"

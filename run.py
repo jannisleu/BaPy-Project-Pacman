@@ -19,7 +19,6 @@ class Game:
         """
         pygame.init()
         self.clock = pygame.time.Clock()
-        self.clock.tick(30)
         self.screen = pygame.display.set_mode(SCREENSIZE)
         self.background = pygame.surface.Surface(SCREENSIZE).convert()
         self.background.fill(BLACK)
@@ -46,6 +45,7 @@ class Game:
 
     def update(self):
         """update the position etc. of our objects in the game"""
+        self.clock.tick(30)
         direction = self.pacman.getDirection()
         #rundungsprobleme
         col, row = self.pacman.position.asInt()

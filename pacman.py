@@ -46,9 +46,9 @@ class Pacman:
         Args:
             direction (key): key for the self.directions dictionary
         """
-        self.position += self.directions[self.direction]*self.speed 
+        self.position += self.directions[self.direction]*self.speed
         self.direction = direction
-
+        print(self.position)
 
     def render(self, screen):
         """Render Pacman onto the screen
