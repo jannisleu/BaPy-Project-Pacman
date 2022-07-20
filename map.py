@@ -45,27 +45,6 @@ class Map:
                     screen.blit(BLANK, (j*TILESIZE,i*TILESIZE))
             
 
-    def validDirections(self, row, col):
-        """Check surrounding fields whether they are valid for the next move
-
-        Args:
-            row (int): row of the maze array(from the current position)
-            col (int): column of the maze array(from the current position)
-
-        Returns:
-            _list: list of valid directions for the next step
-        """
-
-        valid = [STOP]
-        if self.map[row][col - 1] != 0:
-            valid.append(LEFT)
-        if self.map[row][col + 1] != 0:
-            valid.append(RIGHT)
-        if self.map[row - 1][col] != 0:
-            valid.append(UP)
-        if self.map[row + 1][col] != 0:
-            valid.append(DOWN)
-        return valid
 
     def updateValues(self, row, col):
         """update a point in the maze

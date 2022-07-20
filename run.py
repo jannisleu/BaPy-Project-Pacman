@@ -2,6 +2,7 @@ import pygame
 from constants import *
 from pacman import Pacman
 from map import Map
+from ghost import Ghost
 from pygame.locals import (
 
     K_ESCAPE,
@@ -23,6 +24,7 @@ class Game:
         self.background = pygame.surface.Surface(SCREENSIZE).convert()
         self.background.fill(BLACK)
         self.pacman = Pacman()
+        self.ghost = Ghost(RED)
         self.map = Map(level, self.screen)
 
     def checkConditions(self):
@@ -41,18 +43,18 @@ class Game:
         self.screen.blit(self.background, (0,0))
         self.map.render(self.screen)
         self.pacman.render(self.screen)
+        self.ghost.render(self.screen)
         pygame.display.update()
 
     def update(self):
         """update the position etc. of our objects in the game"""
         self.clock.tick(30)
         direction = self.pacman.getDirection()
-        #rundungsprobleme
         col, row = self.pacman.position.asInt()
-        if direction in self.map.validDirections(int(row/TILESIZE), int(col/TILESIZE)):
-            self.pacman.move(direction)
+        if direction in self.pacman.validDirections(self.map.map):
             self.map.updateValues(int(row/TILESIZE), int(col/TILESIZE))
-        #self.pacman.move()
+            self.pacman.move(direction)
+        self.ghost.move(self.ghost.validDirections(self.map.map))
         self.render()
         self.checkConditions()
 
