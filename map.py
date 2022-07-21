@@ -44,7 +44,13 @@ class Map:
                 if data[i][j] == 2:
                     screen.blit(BLANK, (j*TILESIZE,i*TILESIZE))
             
+    def checkCoins(self):
 
+        for j in range(WIDTH):
+            for i in range(HEIGHT):
+                if self.map[i][j] == 1:
+                    return True
+        return False
 
     def updateValues(self, row, col):
         """update a point in the maze

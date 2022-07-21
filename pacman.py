@@ -83,6 +83,13 @@ class Pacman:
         self.direction = direction
         self.position += self.directions[self.direction]*self.speed
 
+    def collision(self, other):
+        helper = self.position - other.position
+        distance = helper.squaredLength()
+        if distance < 100:
+            return True
+        return False
+
     def render(self, screen):
         """Render Pacman onto the screen
 

@@ -1,5 +1,7 @@
+from time import sleep
 import pygame
 from constants import *
+from ghostgroup import GhostGroup
 from pacman import Pacman
 from map import Map
 from ghost import Ghost
@@ -23,8 +25,9 @@ class Game:
         self.screen = pygame.display.set_mode(SCREENSIZE)
         self.background = pygame.surface.Surface(SCREENSIZE).convert()
         self.background.fill(BLACK)
+        self.font = pygame.font.Font(pygame.font.get_default_font(), 36)
         self.pacman = Pacman()
-        self.ghost = Ghost(RED)
+        self.ghosts = GhostGroup()
         self.map = Map(level, self.screen)
 
     def checkConditions(self):
@@ -36,6 +39,18 @@ class Game:
                     exit()
                 if event.key == K_ESCAPE:
                     exit()
+
+        if self.map.checkCoins() == False:
+            text = self.font.render("You Won!", True,  BLACK)
+            pygame.draw.rect(self.screen, WHITE, (SCREENWIDTH/3, SCREENHEIGHT/2 - 7.5, 165, 50))
+            self.screen.blit(text, (SCREENWIDTH/3, SCREENHEIGHT/2))
+            pygame.display.update()
+            sleep(5)
+            exit()
+
+        for i in self.ghosts.group:
+            if self.pacman.collision(i):
+                exit()
         
 
     def render(self):
@@ -43,7 +58,7 @@ class Game:
         self.screen.blit(self.background, (0,0))
         self.map.render(self.screen)
         self.pacman.render(self.screen)
-        self.ghost.render(self.screen)
+        self.ghosts.render(self.screen)
         pygame.display.update()
 
     def update(self):
@@ -54,7 +69,7 @@ class Game:
         if direction in self.pacman.validDirections(self.map.map):
             self.map.updateValues(int(row/TILESIZE), int(col/TILESIZE))
             self.pacman.move(direction)
-        self.ghost.move(self.ghost.validDirections(self.map.map))
+        self.ghosts.move(self.map)
         self.render()
         self.checkConditions()
 
