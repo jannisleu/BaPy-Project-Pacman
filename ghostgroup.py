@@ -5,18 +5,16 @@ from constants import *
 class GhostGroup:
 
     def __init__(self):
-        self.red = Ghost(RED)
-        self.blue = Ghost(BLUE)
-        self.pink = Ghost(PINK)
-        self.green = Ghost(GREEN)
-        self.purple = Ghost(PURPLE)
-        self.orange = Ghost(ORANGE)
-        self.group = [self.red, self.blue, self.pink, self.green, self.purple, self.orange]
+        self.ghosts = [Ghost(RED), Ghost(BLUE), Ghost(PINK), Ghost(GREEN), Ghost(PURPLE), Ghost(ORANGE)]
 
     def move(self, map):
-        for i in self.group:
+        for i in self.ghosts:
             i.move(i.validDirections(map.map))
 
+    def resetPosition(self):
+        for i in self.ghosts:
+            i.resetPosition()
+
     def render(self, screen):
-        for i in self.group:
+        for i in self.ghosts:
             i.render(screen)

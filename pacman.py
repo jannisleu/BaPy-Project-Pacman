@@ -17,10 +17,11 @@ class Pacman:
         self.position = Vector(9*TILESIZE, 16*TILESIZE)
         self.directions = {STOP: Vector(), UP: Vector(0, -1), DOWN: Vector(0, 1), LEFT: Vector(-1, 0), RIGHT: Vector(1, 0)}
         self.direction = STOP
-        self.speed = 1
+        self.speed = 2
         self.radius = 10
         self.color = YELLOW
         self.name = PACMAN
+        self.lives = 3
 
     def getDirection(self):
         """get direction after pressing a key
@@ -89,6 +90,18 @@ class Pacman:
         if distance < 100:
             return True
         return False
+
+    
+    def looseLife(self):
+        self.lives -= 1
+
+    def alive(self):
+        if self.lives < 0:
+            return False
+        return True
+
+    def resetPosition(self):
+        self.position = Vector(9*TILESIZE, 16*TILESIZE)
 
     def render(self, screen):
         """Render Pacman onto the screen

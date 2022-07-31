@@ -20,7 +20,15 @@ class Game:
         Args:
             level (Textfile): Level that you want to play
         """
-        self.reset(level)
+        pygame.init()
+        self.clock = pygame.time.Clock()
+        self.screen = pygame.display.set_mode(SCREENSIZE)
+        self.background = pygame.surface.Surface(SCREENSIZE).convert()
+        self.background.fill(BLACK)
+        self.font = pygame.font.Font(pygame.font.get_default_font(), 36)
+        self.pacman = Pacman()
+        self.ghosts = GhostGroup()
+        self.map = Map(level, self.screen)
 
     def checkConditions(self):
         """Checks for certain keypresses to end the programm"""
@@ -40,14 +48,13 @@ class Game:
             sleep(5)
             exit()
         
-        
-        lives = 3 #counter for levels, funktioniert noch nicht
-        for i in self.ghosts.group:
+        for i in self.ghosts.ghosts:
             if self.pacman.collision(i):
-                lives -= 1
-                if lives > 0:
-                    self.reset("1.txt")
-                elif lives == 0:
+                self.pacman.looseLife()
+                if self.pacman.alive():
+                    self.pacman.resetPosition()
+                    self.ghosts.resetPosition()
+                else: 
                     text = self.font.render("Game Over!", True,  BLACK)
                     pygame.draw.rect(self.screen, WHITE, (SCREENWIDTH/3, SCREENHEIGHT/2 - 7.5, 215, 50))
                     self.screen.blit(text, (SCREENWIDTH/3, SCREENHEIGHT/2))
@@ -78,23 +85,6 @@ class Game:
         self.render()
         self.checkConditions()
 
-    def reset(self, level):
-        '''init function and reset function at the same time 
-           creates game and resets it
-           
-           Args:
-            level (Textfile): Level that you want to play '''
-
-
-        pygame.init()
-        self.clock = pygame.time.Clock()
-        self.screen = pygame.display.set_mode(SCREENSIZE)
-        self.background = pygame.surface.Surface(SCREENSIZE).convert()
-        self.background.fill(BLACK)
-        self.font = pygame.font.Font(pygame.font.get_default_font(), 36)
-        self.pacman = Pacman()
-        self.ghosts = GhostGroup()
-        self.map = Map(level, self.screen)
 
 if __name__ == "__main__":
     #start game

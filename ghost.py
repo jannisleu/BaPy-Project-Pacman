@@ -46,6 +46,9 @@ class Ghost:
         valid = [self.direction]
         return valid
 
+    def resetPosition(self):
+        self.position = Vector(10*TILESIZE, 12*TILESIZE)
+
     def render(self, screen):
         """Render Pacman onto the screen
 
@@ -53,5 +56,5 @@ class Ghost:
             screen (Surface): pygame surface 
         """
         x, y = self.position.asInt()
-        pygame.draw.circle(screen, WHITE, (x + 12.5, y + 12.5), self.radius)
+        pygame.draw.circle(screen, BLACK, (x + 12.5, y + 12.5), self.radius)
         screen.blit(self.name, (x, y))
