@@ -1,6 +1,5 @@
 from constants import *
 import pygame
-import numpy as np
 from vector import Vector
 from pygame.locals import (
     K_LEFT,
@@ -22,7 +21,7 @@ class Pacman:
         self.color = YELLOW
         self.name = PACMAN_RIGHT
         self.lives = 3
-        self.iterations = 0
+        self.iterations = 0  #used to control animation speed
 
     def getDirection(self):
         """get direction after pressing a key
@@ -33,6 +32,7 @@ class Pacman:
         keys = pygame.key.get_pressed()
 
         col, row = self.position.asInt()
+        #check if we are exactly at an entry of our map array(not in between of two entries)
         if col % TILESIZE == 0 and row % TILESIZE == 0:
 
             if keys[K_LEFT]:
@@ -52,18 +52,19 @@ class Pacman:
         """Check surrounding fields whether they are valid for the next move
 
         Args:
-            row (int): row of the maze array(from the current position)
-            col (int): column of the maze array(from the current position)
+            map (np.array): array which contains the state of the map 
 
         Returns:
-            _list: list of valid directions for the next step
+            list: list of valid directions for the next step
         """
 
         col, row = self.position.asInt()
+        #check if we are exactly at an entry of our map array(not in between of two entries)
         if col % TILESIZE == 0 and row % TILESIZE == 0:
             col = int(col/TILESIZE)
             row = int(row/TILESIZE)
             valid = [STOP]
+            #check every entry around the current one 
             if map[row][col - 1] != 0:
                 valid.append(LEFT)
             if map[row][col + 1] != 0:
@@ -73,6 +74,7 @@ class Pacman:
             if map[row + 1][col] != 0:
                 valid.append(DOWN)
             return valid
+        #if we are not at a position where we can change direction(between two array entries): we move on
         valid = [self.direction]
         return valid
 
@@ -85,10 +87,11 @@ class Pacman:
         self.direction = direction
         self.position += self.directions[self.direction]*self.speed
         
+        #control animation speed by updating the images only in every third frame
         self.iterations += 1
         if self.iterations > 2:
             self.iterations = 0
-            
+
             #update pacman image to the new direction
             if self.checkForOpenMouth():
                 if direction == RIGHT:
@@ -112,6 +115,11 @@ class Pacman:
 
 
     def checkForOpenMouth(self):
+        """check if the mouth of Pacman is currently open
+
+        Returns:
+            bool: true if mouth is open
+        """
          
         if  self.name == PACMAN_RIGHT_OPEN:
             return True 
@@ -124,6 +132,14 @@ class Pacman:
         return False
 
     def collision(self, other):
+        """check collision of two objects
+
+        Args:
+            other (Ghost): Ghost which should be checked for collision with Pacman
+
+        Returns:
+            bool: true if there is a collision
+        """
         helper = self.position - other.position
         distance = helper.squaredLength()
         if distance < 100:
@@ -131,14 +147,21 @@ class Pacman:
         return False
  
     def looseLife(self):
+        """remove one life from Pacman"""
         self.lives -= 1
 
     def alive(self):
+        """check if Pacman is alive
+
+        Returns:
+            bool: true if lives >= 0
+        """
         if self.lives < 0:
             return False
         return True
 
     def resetPosition(self):
+        """reset Pacman to starting position"""
         self.position = Vector(9*TILESIZE, 16*TILESIZE)
 
     def render(self, screen):

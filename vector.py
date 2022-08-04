@@ -1,7 +1,7 @@
 import math
 
 class Vector:
-    """Class for a 2 dimensional vector"""
+    """Class for a 2 dimensional vector which makes the movement in the game a lot easier """
     
     def __init__(self, x = 0, y = 0):
         self.x = x

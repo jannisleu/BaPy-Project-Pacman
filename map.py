@@ -45,6 +45,11 @@ class Map:
                     screen.blit(BLANK, (j*TILESIZE,i*TILESIZE))
             
     def checkCoins(self):
+        """check if there are still coins on the map
+
+        Returns:
+            bool: true if there are still coins
+        """
 
         for j in range(WIDTH):
             for i in range(HEIGHT):
