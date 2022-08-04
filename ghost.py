@@ -9,7 +9,7 @@ class Ghost:
         self.position = Vector(10*TILESIZE, 12*TILESIZE)
         self.directions = {STOP: Vector(), UP: Vector(0, -1), DOWN: Vector(0, 1), LEFT: Vector(-1, 0), RIGHT: Vector(1, 0)}
         self.direction = STOP
-        self.speed = 1
+        self.speed = SPEED
         self.radius = 10
         self.name = name
 

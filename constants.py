@@ -1,4 +1,3 @@
-from asyncio.proactor_events import _ProactorDuplexPipeTransport
 import pygame
 
 #file which contains all constant values for the game
@@ -10,6 +9,7 @@ WHITE = (255, 255, 255)
 
 PACMAN = 0
 GHOST = 1
+SPEED = 2
 
 #directions
 LEFT = -1
@@ -41,6 +41,26 @@ BLUE = pygame.transform.scale(blue, (TILESIZE, TILESIZE))
 ORANGE = pygame.transform.scale(orange, (TILESIZE, TILESIZE))
 GREEN = pygame.transform.scale(green, (TILESIZE, TILESIZE))
 PURPLE = pygame.transform.scale(purple, (TILESIZE, TILESIZE))
+
+#Pacman
+pacman_right = pygame.image.load("Pictures/pac right.png")
+pacman_right_open = pygame.image.load("Pictures/pac right open.png")
+pacman_left = pygame.image.load("Pictures/pac left.png")
+pacman_left_open = pygame.image.load("Pictures/pac left open.png")
+pacman_up = pygame.image.load("Pictures/pac up.png")
+pacman_up_open = pygame.image.load("Pictures/pac up open.png")
+pacman_down = pygame.image.load("Pictures/pac down.png")
+pacman_down_open = pygame.image.load("Pictures/pac down open.png")
+
+PACMAN_RIGHT = pygame.transform.scale(pacman_right, (TILESIZE, TILESIZE))
+PACMAN_RIGHT_OPEN = pygame.transform.scale(pacman_right_open, (TILESIZE, TILESIZE))
+PACMAN_LEFT = pygame.transform.scale(pacman_left, (TILESIZE, TILESIZE))
+PACMAN_LEFT_OPEN = pygame.transform.scale(pacman_left_open, (TILESIZE, TILESIZE))
+PACMAN_UP = pygame.transform.scale(pacman_up, (TILESIZE, TILESIZE))
+PACMAN_UP_OPEN = pygame.transform.scale(pacman_up_open, (TILESIZE, TILESIZE))
+PACMAN_DOWN = pygame.transform.scale(pacman_down, (TILESIZE, TILESIZE))
+PACMAN_DOWN_OPEN = pygame.transform.scale(pacman_down_open, (TILESIZE, TILESIZE))
+
 
 #Map
 coin = pygame.image.load("Pictures/bonbon.png")

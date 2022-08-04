@@ -4,7 +4,6 @@ from constants import *
 from ghostgroup import GhostGroup
 from pacman import Pacman
 from map import Map
-from ghost import Ghost
 from pygame.locals import (
 
     K_ESCAPE,
@@ -13,6 +12,7 @@ from pygame.locals import (
 )
 
 class Game:
+    """class which contains the main game loop and manages the game state"""
 
     def __init__(self, level):
         """Create a Game object which manages the current game state
@@ -40,6 +40,7 @@ class Game:
                 if event.key == K_ESCAPE:
                     exit()
 
+        #check whether all coins are collected and print a message 
         if self.map.checkCoins() == False:
             text = self.font.render("You Won!", True,  BLACK)
             pygame.draw.rect(self.screen, WHITE, (SCREENWIDTH/3, SCREENHEIGHT/2 - 7.5, 165, 50))
@@ -48,6 +49,8 @@ class Game:
             sleep(5)
             exit()
         
+
+        #check for collision and if pacman is still alive
         for i in self.ghosts.ghosts:
             if self.pacman.collision(i):
                 self.pacman.looseLife()
@@ -78,9 +81,12 @@ class Game:
         self.clock.tick(30)
         direction = self.pacman.getDirection()
         col, row = self.pacman.position.asInt()
+
+        #position of pacman and the map only get updated if pacman moves into a valid direction
         if direction in self.pacman.validDirections(self.map.map):
             self.map.updateValues(int(row/TILESIZE), int(col/TILESIZE))
             self.pacman.move(direction)
+            
         self.ghosts.move(self.map)
         self.render()
         self.checkConditions()

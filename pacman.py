@@ -17,11 +17,12 @@ class Pacman:
         self.position = Vector(9*TILESIZE, 16*TILESIZE)
         self.directions = {STOP: Vector(), UP: Vector(0, -1), DOWN: Vector(0, 1), LEFT: Vector(-1, 0), RIGHT: Vector(1, 0)}
         self.direction = STOP
-        self.speed = 2
+        self.speed = SPEED
         self.radius = 10
         self.color = YELLOW
-        self.name = PACMAN
+        self.name = PACMAN_RIGHT
         self.lives = 3
+        self.iterations = 0
 
     def getDirection(self):
         """get direction after pressing a key
@@ -83,6 +84,44 @@ class Pacman:
         """
         self.direction = direction
         self.position += self.directions[self.direction]*self.speed
+        
+        self.iterations += 1
+        if self.iterations > 2:
+            self.iterations = 0
+            
+            #update pacman image to the new direction
+            if self.checkForOpenMouth():
+                if direction == RIGHT:
+                    self.name = PACMAN_RIGHT
+                if direction == LEFT:
+                    self.name = PACMAN_LEFT
+                if direction == UP:
+                    self.name = PACMAN_UP
+                if direction == DOWN:
+                    self.name = PACMAN_DOWN
+
+            else:
+                if direction == RIGHT:
+                    self.name = PACMAN_RIGHT_OPEN
+                if direction == LEFT:
+                    self.name = PACMAN_LEFT_OPEN
+                if direction == UP:
+                    self.name = PACMAN_UP_OPEN
+                if direction == DOWN:
+                    self.name = PACMAN_DOWN_OPEN
+
+
+    def checkForOpenMouth(self):
+         
+        if  self.name == PACMAN_RIGHT_OPEN:
+            return True 
+        if  self.name == PACMAN_LEFT_OPEN:
+            return True
+        if  self.name == PACMAN_DOWN_OPEN:
+            return True
+        if  self.name == PACMAN_UP_OPEN:
+            return True
+        return False
 
     def collision(self, other):
         helper = self.position - other.position
@@ -90,8 +129,7 @@ class Pacman:
         if distance < 100:
             return True
         return False
-
-    
+ 
     def looseLife(self):
         self.lives -= 1
 
@@ -110,4 +148,5 @@ class Pacman:
             screen (Surface): pygame surface 
         """
         x, y = self.position.asInt()
-        pygame.draw.circle(screen, YELLOW, (x + 12.5, y + 12.5), self.radius)
+        pygame.draw.circle(screen, BLACK, (x + 12.5, y + 12.5), self.radius)
+        screen.blit(self.name, (x, y))
