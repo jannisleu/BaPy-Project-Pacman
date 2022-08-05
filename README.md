@@ -29,8 +29,10 @@ To run this project, install the following:
 * numpy library 
 * time library 
 
+To play the game you have to run the run.py file. 
+
 
 ## Screenshots 
-![screenshot](https://user-images.githubusercontent.com/103362810/182699419-32549053-7ec5-4f43-86ab-08cb08a6f655.png)
+![screenshot](https://user-images.githubusercontent.com/103362810/183037168-82a9afb3-21bc-452a-8b80-ea3dc6c347fe.png)
 
-![screenshot](https://user-images.githubusercontent.com/103362810/182700059-5caa88c4-60ac-485d-8a10-e04400d9061a.png)
+![screenshot](https://user-images.githubusercontent.com/103362810/183037244-7a7013ea-725b-4bd2-bb28-9fba1cc989b9.png)
